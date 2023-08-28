@@ -1,0 +1,41 @@
+@use "src/shared/Constants.scss";
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto;
+    max-width: 760px;
+    margin: 0px auto 0 auto;
+
+    .menuCategory {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        background-color: #D8E5E9;
+        padding: 0 2px;
+        border-radius: 20px;
+        margin: 20px;
+
+        &:hover {
+            transform: scale(1.03);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .menuCategoryImage {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+        }
+    }
+}
+
+@media(max-width: Constants.$tabletView) {
+    .container {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}

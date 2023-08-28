@@ -1,0 +1,45 @@
+@import "../../../../shared/styles/variables";
+
+.inputContainer {
+    margin-bottom: 20px;
+
+    .input {
+        display: block;
+        width: 90%;
+        padding: 0.75rem 0.5rem;
+        border: 0;
+        border-radius: 2px;
+        font-size: 1rem;
+
+        &:focus {
+            outline: 0;
+
+            &::placeholder {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .inputValid {
+        border-bottom: 2px solid lightgrey;
+
+        &:focus {
+            border-bottom: 2px solid $button-color;
+        }
+    }
+
+    .inputError {
+        border-bottom: 2px solid red;
+
+        &:focus {
+            border-bottom: 2px solid red;
+        }
+    }
+ 
+    .errorMessage {
+        color: red;
+        height: 1em;
+        margin: 0;
+        font-size: 12px;
+    }
+}

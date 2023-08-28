@@ -1,0 +1,125 @@
+@use "src/shared/Constants.scss";
+
+.menuCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: Constants.$cardBackground;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    width: 90%;
+
+    .menuName, .menuDescription, .menuPrice, .detailsLink {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-inline: 2vw;
+
+        .cardText {
+            padding-bottom: 1em;
+            text-align: center;
+        }
+    }
+
+    .menuPrice .priceTitle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .euroIcon {
+            font-size: 1.1rem;
+        }
+    }
+
+    .detailsLink .detailsButton {
+            width: 70%;
+    }
+
+    .menuName {
+        width: 20%;
+    }
+
+    .menuDescription {
+        width: 50%;
+    }
+
+    .menuPrice {
+        width: 10%;
+    }
+
+    .detailsLink {
+        width: 20%;
+    }
+
+    .detailsButton {
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: Constants.$buttonColor;
+        width: 60%;
+        
+        .icon {
+            font-size: 18px;
+        }
+
+        &:hover {
+            scale: 1.05;
+            background-color: Constants.$buttonColor;
+        }
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1190px) {
+    .menuCard .detailsLink .detailsButton {
+        width: 100%;
+    }
+
+    .menuCard {
+        .menuName {
+            width: 15%;
+        }
+
+        .menuDescription {
+            width: 50%;
+        }
+
+        .menuPrice {
+            width: 10%;
+        }
+
+        .detailsLink {
+            width: 25%;
+        }
+    }
+}
+
+@media (max-width: Constants.$mobileView) {
+    .menuCard {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 1em;
+        width: 70%;
+        margin-bottom: 10px;
+
+        .menuName, .menuDescription, .menuPrice, .detailsLink {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding-inline: 2vw;
+
+            .cardText {
+                text-align: center;
+            }
+        }
+
+        .menuName, .menuDescription, .menuPrice, .detailsLink {
+            width: 100%;
+        }
+    }
+}

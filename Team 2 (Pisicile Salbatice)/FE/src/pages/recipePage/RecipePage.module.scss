@@ -1,0 +1,72 @@
+@import "../../shared/styles/card";
+
+.recipePage {
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .recipeContainer {
+        background-color: white;
+        max-width: 55rem;
+        padding: 2em;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+
+        @include card;
+
+        .flexTitle {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+
+            .recipeTitle {
+                font-size: 2.2rem;
+                font-weight: 600;
+            }
+    
+            .recipeTitleContent {
+                font-size: 1.7rem;
+                font-weight: 500;
+            }
+        }
+
+       .flexDescription {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            justify-content: center;
+
+            .recipeDescription {
+                font-size: 1.7rem;
+                font-weight: 600;
+            }
+
+            .recipeDescriptionContent {
+                font-size: 1.5rem;
+                font-weight: 400;
+            }
+       }
+
+       .flexIngredients {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+
+            .recipeIngredients {
+                font-size: 1.7rem;
+                font-weight: 600;
+            }
+
+            .recipeIngredientsContent {
+                font-size: 1.5rem;
+                font-weight: 400;
+            }
+       }
+    }
+}

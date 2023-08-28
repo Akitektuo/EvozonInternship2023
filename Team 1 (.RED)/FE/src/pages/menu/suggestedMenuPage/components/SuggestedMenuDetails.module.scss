@@ -1,0 +1,9 @@
+@use "src/shared/Constants.scss";
+
+.menuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: Constants.$cardBackground;
+}

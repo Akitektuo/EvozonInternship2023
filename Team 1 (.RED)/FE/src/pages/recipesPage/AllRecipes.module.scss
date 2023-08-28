@@ -1,0 +1,71 @@
+@use "src/shared/Constants.scss";
+
+.statusOverlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    height: 70%;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .recipesContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 50px;
+        height: 70%;
+
+        .gridContainer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 16px;
+            margin-bottom: 50px;
+
+            .gridItemContainer {
+                display: flex;
+                flex-direction: column;
+                font-size: 16px;
+                background-color: #D8E5E9;
+                border-radius: 12px;
+                text-decoration: none;
+                color: black;
+        }
+    }
+
+    .linkButton {
+        text-decoration: none;
+        color: black;
+        background-color: Constants.$buttonColor;
+        padding: 10px;
+        border-radius: 5px;
+
+        &:hover {
+            scale: 1.05;
+            background-color: Constants.$buttonColor;
+            }
+        }
+    }
+}
+
+@media(max-width: 970px) {
+    .pageContainer .recipesContainer .gridContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .pageContainer .recipesContainer .gridContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}

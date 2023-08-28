@@ -1,0 +1,36 @@
+.dialogBox {
+    color: green;
+
+    .dialogTitle {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: green;
+
+        .icon {
+            width: 1.5rem;
+            height: 2rem;
+            margin-right: 4px;
+        }
+    }
+
+    .dialogContent :is(.dialogTitle, .dialogContentText) {
+        color: green;
+    }
+
+    &.isError {
+        .dialogTitle {
+            color: #ff3232;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .dialogContent {
+            color: grey;
+
+            .dialogContentText {
+                color: grey;
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+@use "src/shared/Constants.scss";
+
+// .ingredientsContainer {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+
+//     .ingredientName {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         background-color: Constants.$buttonColor;
+//         border-radius: 12px;
+//         text-align: center;
+//         width: 120px;
+//     }
+// }
+
+.ingredientsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .ingredientName {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #66b266;
+        border-radius: 12px;
+        text-align: center;
+        width: 130px;
+        height: 45px;
+    }
+}

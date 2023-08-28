@@ -1,0 +1,17 @@
+@import "../../../../shared/styles/variables";
+
+.recipeContainer {
+    &:hover {
+        cursor: pointer;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .cardRecipe {
+        background-color: $cards-color;
+        text-decoration: none;
+    }
+}

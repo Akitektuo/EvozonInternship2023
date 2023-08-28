@@ -1,0 +1,163 @@
+﻿using AutoFixture;
+using FluentAssertions;
+using MealPlan.Business.Exceptions;
+using MealPlan.Business.Menus.Handlers;
+using MealPlan.Business.Menus.Models;
+using MealPlan.Business.Menus.Queries;
+using MealPlan.Data.Models.Meals;
+using MealPlan.Data.Models.Menus;
+using Moq;
+using NUnit.Framework;
+using OpenAI.Interfaces;
+using OpenAI.ObjectModels.RequestModels;
+using OpenAI.ObjectModels.ResponseModels;
+using OpenAI.ObjectModels.SharedModels;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace MealPlan.UnitTests.Business.Menus.Handlers
+{
+    [TestFixture]
+    public class GetSuggestedMenusQueryHandlerTests
+    {
+        private Mock<IOpenAIService> _openAIService;
+        private GetSuggestedMenuQueryHandler _handler;
+        private IFixture _fixture;
+
+        [SetUp]
+        public void Init()
+        {
+            _openAIService = new Mock<IOpenAIService>();
+            _handler = new GetSuggestedMenuQueryHandler(_openAIService.Object);
+            _fixture = new Fixture();
+        }
+
+        [Test]
+        public async Task WhenOpenAiReturnsSuccessfulResponse_ShouldProcessResponseCorrectly()
+        {
+            var jsonText = "{\"Name\":\"Gym Menu\",\"Description\":\"Protein-rich nourishment to support rigorous training.\",\"CategoryId\":3,\"TotalPrice\":30,\"Meals\":[{\"Name\":\"Protein Pancakes\",\"Price\":7,\"MealTypeId\":1,\"Recipe\":{\"Description\":\"Delicious pancakes made with protein powder and topped with fresh fruit.\",\"Name\":\"Protein Pancakes\",\"Ingredients\":[\"Protein Powder\",\"Eggs\",\"Banana\",\"Blueberries\",\"Maple Syrup\"]}}]}\r\n";
+
+            var mockOpenAIService = MockOpenAIService(jsonText, null);
+            var mockChatMessage = mockOpenAIService.mockChatMessage;
+            var mockChatChoiceResponse = mockOpenAIService.mockChatChoiceResponse;
+            var mockResponse = mockOpenAIService.mockResponse;
+
+            var expectedResult = new SuggestedMenu
+            {
+                Name = "Gym Menu",
+                Description = "Protein-rich nourishment to support rigorous training.",
+                CategoryId = MenuCategory.Gym,
+                TotalPrice = 7,
+                Meals = new List<SuggestedMeal>
+                {
+                    new SuggestedMeal
+                    {
+                        Name = "Protein Pancakes",
+                        Price = 7,
+                        MealTypeId = MealType.Breakfast,
+                        Recipe = new SuggestedRecipe
+                        {
+                            Name = "Protein Pancakes",
+                            Description = "Delicious pancakes made with protein powder and topped with fresh fruit.",
+                            Ingredients = new List<string>
+                            {
+                                "Protein Powder",
+                                "Eggs",
+                                "Banana",
+                                "Blueberries",
+                                "Maple Syrup"
+                            }
+                        }
+                    }
+                }
+            };
+
+            _openAIService.Setup(x => x.ChatCompletion.CreateCompletion
+                (
+                    It.IsAny<ChatCompletionCreateRequest>(),
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken>())
+                )
+                .Returns(Task.FromResult(mockResponse));
+
+            var result = await _handler.Handle(new GetSuggestedMenuQuery(), new CancellationToken());
+            _openAIService.Verify(openAI => openAI.ChatCompletion.CreateCompletion(It.IsAny<ChatCompletionCreateRequest>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+
+        [Test]
+        public async Task WhenOpenAiReturnsUnsuccessfulResponse_ShouldThrowError()
+        {
+            var mockOpenAIService = MockOpenAIService("", new Error());
+            var mockChatMessage = mockOpenAIService.mockChatMessage;
+            var mockChatChoiceResponse = mockOpenAIService.mockChatChoiceResponse;
+            var mockResponse = mockOpenAIService.mockResponse;
+
+            _openAIService.Setup(x => x.ChatCompletion.CreateCompletion(It.IsAny<ChatCompletionCreateRequest>(),
+                It.IsAny<string>(),
+                It.IsAny<CancellationToken>()))
+            .Returns(Task.FromResult(mockResponse));
+
+            Func<Task> action = async () => await _handler.Handle(new GetSuggestedMenuQuery(), new CancellationToken());
+
+            await action.Should()
+                .ThrowAsync<CustomApplicationException>()
+                .WithMessage(JsonSerializer.Serialize(new CustomException
+                {
+                    Message = "Menu could not be generated by ChatGPT",
+                    Code = (int)ErrorCode.UnsuccessfulMenuGeneration
+                }));
+        }
+
+        [Test]
+        public async Task WhenOpenAiReturnsInvalidJsonMessage_ShouldThrowError()
+        {
+            var jsonText = "InvalidJSON\"Name\":\"Gym Menu\",\"Description\":\"Protein-rich nourishment to support rigorous training.\",\"CategoryId\":3,\"TotalPrice\":30,\"Meals\":[{\"Name\":\"Protein Pancakes\",\"Price\":7,\"MealTypeId\":1,\"Recipe\":{\"Description\":\"Delicious pancakes made with protein powder and topped with fresh fruit.\",\"Name\":\"Protein Pancakes\",\"Ingredients\":[{\"Name\":\"Protein Powder\"},{\"Name\":\"Eggs\"},{\"Name\":\"Banana\"},{\"Name\":\"Blueberries\"},{\"Name\":\"Maple Syrup\"}]}}]}\r\n";
+
+            var mockOpenAIService = MockOpenAIService(jsonText, null);
+            var mockChatMessage = mockOpenAIService.mockChatMessage;
+            var mockChatChoiceResponse = mockOpenAIService.mockChatChoiceResponse;
+            var mockResponse = mockOpenAIService.mockResponse;
+
+            _openAIService.Setup(x => x.ChatCompletion.CreateCompletion(It.IsAny<ChatCompletionCreateRequest>(),
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(mockResponse));
+
+            Func<Task> action = async () => await _handler.Handle(new GetSuggestedMenuQuery(), new CancellationToken());
+
+            await action.Should()
+                .ThrowAsync<CustomApplicationException>()
+                .WithMessage(JsonSerializer.Serialize(new CustomException
+                {
+                    Message = "Menu could not be deserialized",
+                    Code = (int)ErrorCode.UnsuccessfulMenuDeserialization
+                }));
+        }
+
+        private (ChatMessage mockChatMessage, ChatChoiceResponse mockChatChoiceResponse, ChatCompletionCreateResponse mockResponse) MockOpenAIService(string text, Error error)
+        {
+            var mockChatMessage = _fixture
+              .Build<ChatMessage>()
+              .With(x => x.Content, text)
+              .Create();
+
+            var mockChatChoiceResponse = _fixture
+                .Build<ChatChoiceResponse>()
+                .With(x => x.Message, mockChatMessage)
+                .Create();
+
+            var mockResponse = _fixture
+                .Build<ChatCompletionCreateResponse>()
+                .With(x => x.Error, error)
+                .With(x => x.Choices, new List<ChatChoiceResponse> { mockChatChoiceResponse })
+                .Create();
+
+            return (mockChatMessage, mockChatChoiceResponse, mockResponse);
+        }
+    }
+}

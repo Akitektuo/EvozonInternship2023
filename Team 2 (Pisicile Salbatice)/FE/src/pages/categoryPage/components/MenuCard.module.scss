@@ -1,0 +1,59 @@
+@import "../../../shared/styles/card";
+
+.menuCard {
+    display: flex;
+    width: 20rem;
+    min-height: 10rem;
+    height: auto;
+    border-radius: .3rem;
+    padding: 1em;
+    font-size: 1.5rem;
+    flex-direction: column;
+    background-color: $cards-color;
+    gap: .7em;
+    justify-content: space-around;
+    color: black;
+
+    @include card;
+
+    .namecard {
+        display: flex;
+        gap: .5rem;
+        align-items: baseline;
+
+        .nameTitle {
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+        .nameprop {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    }
+
+    .priceCard {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        .priceLine {
+            display: flex;
+            gap: .5rem;
+            align-items: baseline;
+            
+            .priceTitle {
+                font-size: 1.5rem;
+                font-weight: 500;
+            }
+
+            .priceProp {
+                font-size: 1.2rem;
+            }
+        }
+            
+        .categoryCard {
+            font-size: 1rem;
+            color: rgb(69, 57, 57);
+        }
+    }
+}

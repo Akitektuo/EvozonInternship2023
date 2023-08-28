@@ -1,0 +1,33 @@
+.inputControl {
+    padding: 10px 0;
+    margin: 10px 0;
+    width: 50%;
+
+    &:has(input)::after {
+        border-bottom: 2px solid green;
+    }
+
+    &:has(input:placeholder-shown)::after {
+        border-bottom: 2px solid blue;
+    }
+
+    &:has(input:invalid)::after {
+        border-bottom: 2px solid red;
+    }
+}
+
+.invalidInput:has(input)::after {
+    border-bottom: 2px solid red;
+}
+
+.errorBox {
+    color: red;
+    text-align: center;
+    min-height: 45px;
+}
+
+@media (max-width: 1200px) {
+    .errorBox {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,95 @@
+@use "src/shared/Constants.scss";
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .searchContainer {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 30%;
+    }
+
+    .createRecipeContainer {
+        margin-top: 20px;
+        width: 50%;
+
+        .recipeNameInput {
+            border: none;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            padding: 10px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .selectedIngredientsList {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 5px;
+
+            .selectedIngredient {
+                cursor: pointer;
+                min-width: 165px;
+                height: 25px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                background-color: Constants.$buttonColor;
+                border-radius: 12px;
+                overflow: hidden;
+
+                &:hover {
+                    filter: brightness(85%);
+                }
+
+                .child {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .recipeDescription {
+            border: none;
+            border-radius: 12px;
+            min-width: 400px;
+            min-height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 15px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .errorMessage {
+            color: #ff4c4c;
+        }
+
+        .submitButton {
+            margin-top: 10px;
+            border-radius: 12px;
+            display: block;
+            color: black;
+            background-color: Constants.$buttonColor;
+
+            &:disabled {
+                background-color: grey;
+            }
+
+            &:hover {
+                scale: 1.05;
+            }
+        }
+    }
+}

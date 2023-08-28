@@ -1,0 +1,68 @@
+@use "src/shared/Constants.scss";
+
+.flexContainer {
+    display: flex;
+    height: 100%;
+
+    .applicationBar {
+        background-color: Constants.$navigationBarColor;
+
+        .toolbar {
+            justify-content: space-between;
+
+            .applicationName {
+                color: white;
+                text-decoration: none;
+            }
+
+            .itemButton {
+                background-color: Constants.$buttonColor;
+                color: black;
+                text-decoration: none;
+
+                &:first-child {
+                    margin-right: 20px;
+                }
+
+                &:hover {
+                    background-color: Constants.$buttonColor;
+                    scale: 1.05;
+                }
+            }
+        }
+    }
+
+    .mainContent {
+        width: 100vw;
+        height: 100%;
+        background-color: Constants.$backgroundColor;
+        padding-top: 70px;
+        overflow-y: auto;
+    }
+}
+
+@media(min-width: Constants.$mobileView) {
+    .flexContainer .applicationBar .toolbar .iconButton {
+        display: none;
+    }
+
+    .drawer {
+        display: none;
+    }
+}
+
+@media(max-width: Constants.$mobileView) {
+    .flexContainer .applicationBar .toolbar {
+        .applicationName {
+            display: none;
+        }
+
+        .buttonBox {
+            display: none;
+        }
+    }
+
+    .drawer {
+        display: block;
+    }
+}

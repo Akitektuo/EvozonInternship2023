@@ -1,0 +1,20 @@
+.menusPage {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .allMenusContainer {
+        display: flex;
+        gap: 2rem;
+        padding: 2em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }   
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        padding: 1rem 0;
+    }
+}

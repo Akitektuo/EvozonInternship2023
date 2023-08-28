@@ -1,0 +1,15 @@
+.container {
+    margin: 2rem;
+    padding: 2rem;
+}
+
+div.elevatedLoadingOverlay {
+    z-index: 1400;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+button.actionButton {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+}

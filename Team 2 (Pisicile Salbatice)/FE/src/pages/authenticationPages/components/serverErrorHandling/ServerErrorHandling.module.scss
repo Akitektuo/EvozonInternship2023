@@ -1,0 +1,23 @@
+.popUpContainer {
+    padding: 1.5em;
+    
+    .genericErrorMessage {
+        font-size: 1.7rem;
+        color: rgb(243, 11, 11);
+        font-weight: 500;
+    }
+
+    .containerMessage {
+        background: #FFC0CB;
+        border-radius: 0.3em;
+    }
+
+    .titleError {
+        font-size: 2rem;
+    }
+
+    .textMessage {
+        font-weight: 600;
+        color: rgb(124, 60, 60);
+    }
+}

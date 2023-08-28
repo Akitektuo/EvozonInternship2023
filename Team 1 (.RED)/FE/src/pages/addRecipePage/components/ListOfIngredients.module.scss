@@ -1,0 +1,22 @@
+@use "src/shared/Constants.scss";
+
+.listOfIngredients {
+    width: 100%;
+    height: 340px;
+    overflow-y: scroll;
+
+    .ingredientContainer {
+        cursor: pointer;
+        background-color: white;
+        margin-bottom: 5px;
+        padding: 0 12px;
+
+        &:active {
+            background-color: Constants.$buttonColor;
+        }
+
+        &:hover {
+            filter: brightness(90%);
+        }
+    }
+}

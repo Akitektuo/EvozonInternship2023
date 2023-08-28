@@ -1,0 +1,31 @@
+@import "../../../shared/styles/card";
+
+.categoryCard {
+    width: 20rem;
+    min-height: 15rem;
+    padding: 2em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    @include card;
+    
+    .categoryTitle {
+        display: flex;
+        justify-content: center;
+        font-size: 1.7rem;
+        font-weight: 600;
+    }
+    .categoryImage {
+        height: 15rem;
+        
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+
+}

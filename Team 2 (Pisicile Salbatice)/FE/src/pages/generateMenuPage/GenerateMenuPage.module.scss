@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+    gap: 1rem;
+
+    .control {
+        display: flex;
+        gap: .5rem;
+        align-items: baseline;
+    }
+}

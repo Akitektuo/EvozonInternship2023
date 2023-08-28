@@ -1,0 +1,20 @@
+@import "../shared/styles/variables";
+
+.navigationBarItem {
+    color: $button-color;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 1.3rem;
+    font-style: normal;
+    letter-spacing: .7px;
+    text-decoration: none;
+
+    &:hover {
+        color: $navigation-link-color;
+    }
+    
+    &.active {
+        font-weight: 600;
+        color: $navigation-link-color;
+    }
+}

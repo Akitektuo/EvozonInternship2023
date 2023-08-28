@@ -1,0 +1,11 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .loginContainer {
+        max-width: 30%;
+        margin-top: 1rem;
+    }
+}

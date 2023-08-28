@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Betalgo.OpenAI" Version="7.1.5" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.21" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Meals\Handlers\" />
+    <Folder Include="Meals\Models\" />
+    <Folder Include="Meals\Queries\" />
+    <Folder Include="Orders\Models\" />
+    <Folder Include="Orders\Queries\" />
+    <Folder Include="Recipes\Models\" />
+    <Folder Include="Users\Models\" />
+    <Folder Include="Versions\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MealPlan.Data\MealPlan.Data.csproj" />
+  </ItemGroup>
+
+</Project>

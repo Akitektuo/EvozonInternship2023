@@ -1,0 +1,43 @@
+@use "src/shared/Constants.scss";
+
+.drawerContainer {
+    text-align: center; 
+    padding-top: 10px;
+
+    .applicationName {
+        margin: 16px 0; 
+        text-decoration: none;
+        color: black;
+    }
+
+    .divider {
+        padding-top: 10px;
+    }
+
+    .drawerList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .listItem {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        
+            .listItemButton {
+                text-align: center;
+                border-radius: 10px;
+                background-color: #64C3ED;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+        }  
+    }
+}
+
+@media(max-width: Constants.$mobileView) {
+    .drawerContainer {
+        box-sizing: border-box;
+        width: 240px; 
+    }
+}

@@ -1,0 +1,26 @@
+.addRecipePage {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .addRecipeContainer {
+        padding: 2rem 0;
+    
+    .errorMessage {
+        color: #d32f2f;
+        height: 1em;
+        margin: 0;
+        font-size: 12px;
+    }
+
+        .chipContainer {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .chipItem {
+            margin: 8px;
+        }
+    }
+}
